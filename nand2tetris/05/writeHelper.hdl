@@ -1,0 +1,17 @@
+// this chip gives control signal writeD
+// it has 2 inputs, one tells the type of instruction
+// other tells whether the data will be written to register D 
+
+// instruction = 0, destination=0, writeD=0
+// instruction = 0, destination=1, writeD=0
+// instruction = 1, destination=0, writeD=0
+// instruction = 1, destination=1, writeD=1
+
+CHIP WriteHelper{
+    IN instruction,DHelper;
+    OUT writeD;
+    PARTS:
+    And(a=instruction,b=destination,out=writeD);
+}
+
+// this can be used for both D and M registers, only destination bits are different, rest functionality is same

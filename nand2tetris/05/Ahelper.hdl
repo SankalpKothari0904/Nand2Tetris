@@ -1,0 +1,18 @@
+// this chip gives control signals muxA and writeA
+// it has 2 inputs, one tells the type of instruction
+// other tells whether the data will be written to register A 
+
+// instruction = 0, destination=0, muxA=1 , writeA=1
+// instruction = 0, destination=1, muxA=1 , writeA=1
+// instruction = 1, destination=0, muxA=X , writeA=0
+// instruction = 1, destination=1, muxA=0 , writeA=1
+
+CHIP AHelper{
+    IN instruction,destination;
+    OUT muxA,writeA;
+
+    PARTS:
+    Not(in=instruction,out=muxA);
+    Not(in=instruction,out=instructionBar);
+    Or(a=instructionBar,b=destination,out=writeA);
+}
